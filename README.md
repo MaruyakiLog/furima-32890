@@ -1,24 +1,59 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Usersテーブル
+| Column    | Type   | Option      |
+| --------- | ------ | ----------- |
+| nickname  | string | null: false |
+| email     | string | null: false |
+| password  | string | null: false |
 
-Things you may want to cover:
+### Association
+- has_many :items
+- has_many :purchases
 
-* Ruby version
+## Itemsテーブル
+| Column          | Type       | Option                        |
+| --------------- | ---------- | ----------------------------- |
+| item_name       | string     | null: false                   |
+| description     | text       | null: false                   |
+| category        | string     | null: false                   |
+| condition       | string     | null: false                   |
+| responsibility  | string     | null: false                   |
+| delivery_source | string     | null: false                   |
+| days            | integer    | null: false                   |
+| price           | string     | null: false                   |
+| user            | references | null:false, foreign_key: true |
+| purchase        | references | null:false, foreign_key: true |
+| shippings       | references | null:false, foreign_key: true |
 
-* System dependencies
+### Association
+- belongs_to :user
+- belongs_to :shipping
+- has_one :purchase
 
-* Configuration
+## Purchasesテーブル
+| Column        | Type       | Option                         |
+| ------------- | ---------- | ------------------------------ |
+| credit_number | integer    | null: false                    |
+| user          | references | null: false, foreign_key: true |
+| item          | references | null: false, foreign_key: true |
 
-* Database creation
+### Association
+- belongs_to :user
+- belongs_to :item
+- belongs_to :shipping
 
-* Database initialization
 
-* How to run the test suite
+## Shippingsテーブル
+| Column        | Type    | Option      |
+| ------------- | ------- | ----------- |
+| postal_number | string  | null: false |
+| prefecture    | string  | null: false |
+| city          | string  | null: false |
+| address       | text    | null: false |
+| building      | text    |             |
+| phone_number  | integer | null: false |
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Association
+- has_many :items
+- has_many :purchase
