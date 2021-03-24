@@ -19,7 +19,7 @@
 ## Itemsテーブル
 | Column            | Type       | Option                        |
 | ----------------- | ---------- | ----------------------------- |
-| item_name         | string     | null: false                   |
+| name              | string     | null: false                   |
 | description       | text       | null: false                   |
 | category_id       | integer    | null: false                   |
 | condition_id      | integer    | null: false                   |
@@ -51,12 +51,9 @@
 | prefecture_id     | string     | null: false                   |
 | city              | string     | null: false                   |
 | address           | string     | null: false                   |
-| building          | text       |                               |
+| building          | string     |                               |
 | phone_number      | string     | null: false                   |
 | purchase          | references | null:false, foreign_key: true |
 
-
-
 ### Association
-- has_many   :items
 - belongs_to :purchase
