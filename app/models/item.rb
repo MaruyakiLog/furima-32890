@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :condition
   belongs_to :responsibility
+  belongs_to :prefecture
   
   HANKAKU_NUM_REGEX = /\A[0-9]+\z/.freeze
   
