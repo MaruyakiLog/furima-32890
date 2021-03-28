@@ -7,10 +7,19 @@ class User < ApplicationRecord
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
 
-  validates :nickname,        presence: true
-  validates :last_name,       presence: true
-  validates :first_name,      presence: true
-  validates :last_name_kana,  presence: true
-  validates :first_name_kana, presence: true
-  validates :birthday,        presence: true
+  ZENKAKU_REGEX = /\A[ぁ-んァ-ン一-龥]/.freeze
+  ZENKAKU_KANA_REGEX = /\A[ァ-ヶー－]+\z/
+  with_options presence: true do
+    validates :nickname
+    validates :birthday
+    with_options format: {with: ZENKAKU_REGEX, message: 'には全角文字で設定してください'} do
+      validates :last_name 
+      validates :first_name
+    end
+    with_options format: {with: ZENKAKU_KANA_REGEX, message: 'には全角カタカナで設定してください'} do
+      validates :last_name_kana
+      validates :first_name_kana
+    end
+  end
+
 end
