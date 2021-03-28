@@ -13,7 +13,7 @@ class Item < ApplicationRecord
     validates :responsibility_id
     validates :prefecture_id
     validates :day_id
-    validates :price, greater_than_or_equel_to: 300, lass_than_or_equel_to: 9999999, format: {with: HANKAKU_NUM_REGEX, message: 'には半角数字で入力してください'}
+    validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}, format: {with: HANKAKU_NUM_REGEX, message: 'には半角数字で入力してください'}
     validates :user
   end
 end
