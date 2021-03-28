@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
+  belongs_to :condition
   
   HANKAKU_NUM_REGEX = /\A[0-9]+\z/.freeze
   
