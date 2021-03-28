@@ -12,14 +12,13 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname
     validates :birthday
-    with_options format: {with: ZENKAKU_REGEX, message: 'には全角文字で設定してください'} do
-      validates :last_name 
+    with_options format: { with: ZENKAKU_REGEX, message: 'には全角文字で設定してください' } do
+      validates :last_name
       validates :first_name
     end
-    with_options format: {with: ZENKAKU_KANA_REGEX, message: 'には全角カタカナで設定してください'} do
+    with_options format: { with: ZENKAKU_KANA_REGEX, message: 'には全角カタカナで設定してください' } do
       validates :last_name_kana
       validates :first_name_kana
     end
   end
-
 end
