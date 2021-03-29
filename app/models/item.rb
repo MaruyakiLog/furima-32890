@@ -13,8 +13,8 @@ class Item < ApplicationRecord
   HANKAKU_NUM_REGEX = /\A[0-9]+\z/.freeze
   
   with_options presence:true do
+    validates :image
     validates :name
-    validates :description
     validates :category_id, numericality: {other_than: 1}
     validates :condition_id
     validates :responsibility_id
