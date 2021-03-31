@@ -142,6 +142,11 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include('Price Half-width number')
     end
+    it 'priceが半角英数字混在である' do
+      @item.price = '1000a'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price Half-width number')
+    end
 
     # user
     it 'userが空である' do
