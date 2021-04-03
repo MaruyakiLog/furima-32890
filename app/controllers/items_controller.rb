@@ -1,6 +1,7 @@
 require 'responsibility'
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: :new
+  before_action :user_check, only: :edit
 
   def index
     @items = Item.order(id: 'DESC')
@@ -30,7 +31,6 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
-      # binding.pry
       redirect_to item_path
     else
       render :edit
@@ -43,4 +43,11 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:image, :name, :description, :category_id, :condition_id, :responsibility_id, :prefecture_id,
                                  :day_id, :price).merge(user_id: current_user.id)
   end
+  
+  def user_check
+    if user_signed_in? == false
+      render "devise/sessions/new"
+    end
+  end
+
 end
