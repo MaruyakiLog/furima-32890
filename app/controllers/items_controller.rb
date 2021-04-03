@@ -1,6 +1,7 @@
 require 'responsibility'
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: :new
+  before_action :signout_check, only: :edit
   before_action :user_check, only: :edit
 
   def index
@@ -44,9 +45,17 @@ class ItemsController < ApplicationController
                                  :day_id, :price).merge(user_id: current_user.id)
   end
   
-  def user_check
+  def signout_check
     if user_signed_in? == false
       render "devise/sessions/new"
+    end
+  end
+
+  def user_check
+    item = Item.find(params[:id])
+    if current_user.id != item.user.id
+      @items = Item.order(id: 'DESC')
+      render "index"
     end
   end
 
