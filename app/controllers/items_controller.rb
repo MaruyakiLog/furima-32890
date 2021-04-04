@@ -1,8 +1,8 @@
 require 'responsibility'
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_item, only: [:show, :edit, :update]
   before_action :user_check, only: [:edit, :update]
-  before_action :set_item, only: [:create, :show, :edit, :update]
 
   def index
     @items = Item.order(id: 'DESC')
@@ -13,6 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
     else
@@ -41,16 +42,16 @@ class ItemsController < ApplicationController
                                  :day_id, :price).merge(user_id: current_user.id)
   end
 
-  def user_check
+  def set_item
     @item = Item.find(params[:id])
+  end
+  
+  def user_check
     if current_user.id != @item.user.id
       @items = Item.order(id: 'DESC')
       render "index"
     end
   end
 
-  def set_item
-    @item = Item.find(params[:id])
-  end
 
 end
