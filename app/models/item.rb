@@ -20,8 +20,6 @@ class Item < ApplicationRecord
     validates :prefecture_id, numericality: { other_than: 1, message: 'Select' }
     validates :day_id, numericality: { other_than: 1, message: 'Select' }
     validates :price, numericality: { with: HALF_NUM_REGEX, message: 'Half-width number' }
-    validates :price,
-              numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }
     validates :user
   end
   validates :category_id,
@@ -33,4 +31,6 @@ class Item < ApplicationRecord
   validates :prefecture_id,
             numericality: { greater_than_or_equal_to: 2, less_than_or_equal_to: 48, message: 'Out of setting range' }
   validates :day_id, numericality: { greater_than_or_equal_to: 2, less_than_or_equal_to: 4, message: 'Out of setting range' }
+  validates :price,
+            numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }
 end
