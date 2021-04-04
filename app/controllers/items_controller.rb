@@ -45,13 +45,11 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
-  
+
   def user_check
     if current_user.id != @item.user.id
       @items = Item.order(id: 'DESC')
-      render "index"
+      render 'index'
     end
   end
-
-
 end
