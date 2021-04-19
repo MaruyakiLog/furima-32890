@@ -1,7 +1,6 @@
 class PurchaseShipping
   include ActiveModel::Model
-  attr_accessor :postal_number, :prefecture_id, :city, :address, :building, :phone_number
-  attr_accessor :token
+  attr_accessor :postal_number, :prefecture_id, :city, :address, :building, :phone_number, :token
   
   HYPHEN_REGEX = /\A\d{3}[-]\d{4}\z/.freeze
   NUMBER_REGEX = /\A[0-9]+\z/.freeze
