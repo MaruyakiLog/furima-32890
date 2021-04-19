@@ -19,12 +19,12 @@ RSpec.describe PurchaseShipping, type: :model do
     it 'postal_numberの4文字目にハイフンが含まれない' do
       @purchase_shipping.postal_number = '111111-1'
       @purchase_shipping.valid?
-      expect(@purchase_shipping.errors.full_messages).to include("Postal number Input correctly")
+      expect(@purchase_shipping.errors.full_messages).to include('Postal number Input correctly')
     end
     it 'postal_numberに文字列が含まれる' do
       @purchase_shipping.postal_number = '111-11aa'
       @purchase_shipping.valid?
-      expect(@purchase_shipping.errors.full_messages).to include("Postal number Input correctly")
+      expect(@purchase_shipping.errors.full_messages).to include('Postal number Input correctly')
     end
     # prefecture_id
     it 'prefecture_idが空である' do
@@ -35,7 +35,7 @@ RSpec.describe PurchaseShipping, type: :model do
     it 'prefecture_idが1である' do
       @purchase_shipping.prefecture_id = 1
       @purchase_shipping.valid?
-      expect(@purchase_shipping.errors.full_messages).to include("Prefecture Select")
+      expect(@purchase_shipping.errors.full_messages).to include('Prefecture Select')
     end
     # city
     it 'cityが空である' do
@@ -58,7 +58,7 @@ RSpec.describe PurchaseShipping, type: :model do
     it 'phone_numberに文字列が含まれる' do
       @purchase_shipping.phone_number = 'a1234567890'
       @purchase_shipping.valid?
-      expect(@purchase_shipping.errors.full_messages).to include("Phone number Input only number")
+      expect(@purchase_shipping.errors.full_messages).to include('Phone number Input only number')
     end
     # token
     it 'tokenが空である' do

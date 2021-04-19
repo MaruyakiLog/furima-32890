@@ -12,16 +12,17 @@ class OrdersController < ApplicationController
     if @purchase_shipping.valid?
       pay_item(@item)
       @purchase_shipping.save(@item)
-      return redirect_to root_path
+      redirect_to root_path
     else
       render 'index'
     end
   end
 
   private
-  
+
   def purchase_params
-    params.require(:purchase_shipping).permit(:postal_number, :prefecture_id, :city, :address, :building, :phone_number).merge(token: params[:token])
+    params.require(:purchase_shipping).permit(:postal_number, :prefecture_id, :city, :address, :building,
+                                              :phone_number).merge(token: params[:token])
   end
 
   def set_item
@@ -29,13 +30,11 @@ class OrdersController < ApplicationController
   end
 
   def user_check
-    if current_user.id == @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id == @item.user_id
   end
 
   def pay_item(item)
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: item.price,
       card: purchase_params[:token],
