@@ -1,7 +1,8 @@
-const { formInputClickSelector } = require("@rails/ujs")
+// const { formInputClickSelector } = require("@rails/ujs")
 
 const pay = () => {
-  const form = document.getElementById("charge-form");
+  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
+  const form = document.getElementById("charge-form");  // PAYJ.JPの公開鍵
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -9,18 +10,27 @@ const pay = () => {
     const formData = new FormData(formResult);
 
     const card = {
-      number: formData.get("item[number]"),
-      cvc: formData.get("item[cvc]"),
-      exp_month: formData.get("item[exp_month]"),
-      exp_year: formData.get("item[exp_year]")
+      number: formData.get("purchase_shipping[number]"),
+      cvc: formData.get("purchase_shipping[cvc]"),
+      exp_month: formData.get("purchase_shipping[exp_month]"),
+      exp_year:  `20${formData.get("purchase_shipping[exp_year]")}`,
     };
 
     Payjp.createToken(card, (status, response) => {
-      debugger;
+      if (status == 200) {
+        const token = response.id;
+        const renderDom = document.getElementById("charge-form");
+        const tokenObj = `<input value=${token} name ='token' type="hidden">`;
+        renderDom.insertAdjacentHTML("beforeend", tokenObj);
+      }
+
+      document.getElementById("card-number").removeAttribute("name");
+      document.getElementById("card-cvc").removeAttribute("name");
+      document.getElementById("card-exp-month").removeAttribute("name");
+      document.getElementById("card-exp-year").removeAttribute("name");
+
+      document.getElementById("charge-form").submit();
     });
-
-
-    console.log("test");
   });
 }
 
