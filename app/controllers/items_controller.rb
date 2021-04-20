@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:edit, :update, :destroy]
+  before_action :sold_out_check, only: :edit
 
   def index
     @items = Item.order(id: 'DESC')
@@ -55,6 +56,17 @@ class ItemsController < ApplicationController
     if current_user.id != @item.user.id
       @items = Item.order(id: 'DESC')
       render 'index'
+    end
+  end
+
+  def sold_out_check
+    if @item.purchase != nil
+      if user_signed_in? 
+        @items = Item.order(id: 'DESC')
+        render 'index'
+      else
+        render 'devise/sessions/new'
+      end
     end
   end
 end

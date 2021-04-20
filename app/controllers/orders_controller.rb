@@ -2,8 +2,10 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: :index
   before_action :set_item, only: [:index, :create]
   before_action :user_check, only: :index
+  before_action :sold_out_check, only: :index
 
   def index
+    binding.pry
     @purchase_shipping = PurchaseShipping.new
   end
 
@@ -33,6 +35,13 @@ class OrdersController < ApplicationController
     redirect_to root_path if current_user.id == @item.user_id
   end
 
+  def sold_out_check
+    if @item.purchase != nil
+      @items = Item.order(id: 'DESC')
+      render '/items/index'
+    end
+  end
+
   def pay_item(item)
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
@@ -41,4 +50,5 @@ class OrdersController < ApplicationController
       currency: 'jpy'
     )
   end
+
 end
