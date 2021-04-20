@@ -5,7 +5,6 @@ class OrdersController < ApplicationController
   before_action :sold_out_check, only: :index
 
   def index
-    binding.pry
     @purchase_shipping = PurchaseShipping.new
   end
 
