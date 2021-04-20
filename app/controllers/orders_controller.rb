@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
   end
 
   def sold_out_check
-    if @item.purchase != nil
+    unless @item.purchase.nil?
       @items = Item.order(id: 'DESC')
       render '/items/index'
     end
@@ -50,5 +50,4 @@ class OrdersController < ApplicationController
       currency: 'jpy'
     )
   end
-
 end
