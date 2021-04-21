@@ -14,6 +14,14 @@ RSpec.describe PurchaseShipping, type: :model do
       @purchase_shipping.item_id = @item.id
       expect(@purchase_shipping).to be_valid
     end
+    it 'buildingが抜けていても登録できる' do
+      @user.save
+      @item.save
+      @purchase_shipping.user_id = @user.id
+      @purchase_shipping.item_id = @item.id
+      @purchase_shipping.building = nil
+      expect(@purchase_shipping).to be_valid
+    end
   end
   context '商品を購入できない場合' do
     # postal_number

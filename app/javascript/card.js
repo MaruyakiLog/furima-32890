@@ -1,4 +1,3 @@
-// const { formInputClickSelector } = require("@rails/ujs")
 
 const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);

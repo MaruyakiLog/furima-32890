@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: :index
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item, only: [:index, :create]
-  before_action :user_check, only: :index
-  before_action :sold_out_check, only: :index
+  before_action :user_check, only: [:index, :create]
+  before_action :sold_out_check, only: [:index, :create]
 
   def index
     @purchase_shipping = PurchaseShipping.new
