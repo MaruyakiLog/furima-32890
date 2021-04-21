@@ -3,9 +3,15 @@ require 'rails_helper'
 RSpec.describe PurchaseShipping, type: :model do
   before do
     @purchase_shipping = FactoryBot.build(:purchase_shipping)
+    @user = FactoryBot.build(:user)
+    @item = FactoryBot.build(:item)
   end
   context '商品を購入できる場合' do
     it 'postal_number、prefecture_id、city、address、building、phone_number、クレジットカードのtokenが存在する' do
+      @user.save
+      @item.save
+      @purchase_shipping.user_id = @user.id
+      @purchase_shipping.item_id = @item.id
       expect(@purchase_shipping).to be_valid
     end
   end
@@ -75,12 +81,14 @@ RSpec.describe PurchaseShipping, type: :model do
     it 'user_idが空である' do
       @purchase_shipping.user_id = nil
       @purchase_shipping.valid?
+      # binding.pry
       expect(@purchase_shipping.errors.full_messages).to include("User can't be blank")
     end
     # item_id
     it 'item_idが空である' do
       @purchase_shipping.item_id = nil
       @purchase_shipping.valid?
+      # binding.pry
       expect(@purchase_shipping.errors.full_messages).to include("Item can't be blank")
     end
   end
