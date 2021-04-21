@@ -9,7 +9,7 @@ RSpec.describe PurchaseShipping, type: :model do
     @item.save
     @purchase_shipping.user_id = @user.id
     @purchase_shipping.item_id = @item.id
-    sleep 0.1
+    sleep 0.1  # 処理負荷による接続エラー回避のための遅延
   end
   context '商品を購入できる場合' do
     it 'postal_number、prefecture_id、city、address、building、phone_number、クレジットカードのtokenが存在する' do
