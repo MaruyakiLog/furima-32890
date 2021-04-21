@@ -61,12 +61,7 @@ class ItemsController < ApplicationController
 
   def sold_out_check
     unless @item.purchase.nil?
-      if user_signed_in?
-        @items = Item.order(id: 'DESC')
-        render 'index'
-      else
-        render 'devise/sessions/new'
-      end
+      redirect_to root_path
     end
   end
 end
