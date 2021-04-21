@@ -23,7 +23,7 @@
 | description       | text       | null: false                    |
 | category_id       | integer    | null: false                    |
 | condition_id      | integer    | null: false                    |
-| responsibility_id | integer    | null: false                    |
+| responsibility_id | integer    | null: false                    |1
 | prefecture_id     | integer    | null: false                    |
 | day_id            | integer    | null: false                    |
 | price             | integer    | null: false                    |
@@ -48,7 +48,7 @@
 | Column            | Type       | Option                        |
 | ----------------- | -------    | ----------------------------- |
 | postal_number     | string     | null: false                   |
-| prefecture_id     | string     | null: false                   |
+| prefecture_id     | integer    | null: false                   |
 | city              | string     | null: false                   |
 | address           | string     | null: false                   |
 | building          | string     |                               |
