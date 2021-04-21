@@ -69,7 +69,7 @@ RSpec.describe PurchaseShipping, type: :model do
     it 'phone_numberが12桁以上である' do
       @purchase_shipping.phone_number = '090123456789'
       @purchase_shipping.valid?
-      expect(@purchase_shipping.errors.full_messages).to include("Phone number Out of setting range")
+      expect(@purchase_shipping.errors.full_messages).to include('Phone number Out of setting range')
     end
     # token
     it 'tokenが空である' do
@@ -81,14 +81,12 @@ RSpec.describe PurchaseShipping, type: :model do
     it 'user_idが空である' do
       @purchase_shipping.user_id = nil
       @purchase_shipping.valid?
-      # binding.pry
       expect(@purchase_shipping.errors.full_messages).to include("User can't be blank")
     end
     # item_id
     it 'item_idが空である' do
       @purchase_shipping.item_id = nil
       @purchase_shipping.valid?
-      # binding.pry
       expect(@purchase_shipping.errors.full_messages).to include("Item can't be blank")
     end
   end
