@@ -5,20 +5,17 @@ RSpec.describe PurchaseShipping, type: :model do
     @purchase_shipping = FactoryBot.build(:purchase_shipping)
     @user = FactoryBot.build(:user)
     @item = FactoryBot.build(:item)
+    @user.save
+    @item.save
+    @purchase_shipping.user_id = @user.id
+    @purchase_shipping.item_id = @item.id
+    sleep 0.1
   end
   context '商品を購入できる場合' do
     it 'postal_number、prefecture_id、city、address、building、phone_number、クレジットカードのtokenが存在する' do
-      @user.save
-      @item.save
-      @purchase_shipping.user_id = @user.id
-      @purchase_shipping.item_id = @item.id
       expect(@purchase_shipping).to be_valid
     end
     it 'buildingが抜けていても登録できる' do
-      @user.save
-      @item.save
-      @purchase_shipping.user_id = @user.id
-      @purchase_shipping.item_id = @item.id
       @purchase_shipping.building = nil
       expect(@purchase_shipping).to be_valid
     end
