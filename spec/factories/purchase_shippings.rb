@@ -5,7 +5,7 @@ FactoryBot.define do
     city            { Faker::Lorem.sentence }
     address         { Faker::Lorem.sentence }
     building        { Faker::Lorem.sentence }
-    phone_number    { Faker::Lorem.characters(number: 11, min_numeric: 11 ) }
+    phone_number    { Faker::Lorem.characters(number: 11, min_numeric: 11) }
     token           { 'tok_abcdefghijk00000000000000000' }
   end
 end
