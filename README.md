@@ -23,7 +23,7 @@
 | description       | text       | null: false                    |
 | category_id       | integer    | null: false                    |
 | condition_id      | integer    | null: false                    |
-| responsibility_id | integer    | null: false                    |1
+| responsibility_id | integer    | null: false                    |
 | prefecture_id     | integer    | null: false                    |
 | day_id            | integer    | null: false                    |
 | price             | integer    | null: false                    |
